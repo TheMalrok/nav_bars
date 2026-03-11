@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nav_bars/screens/details_screen.dart';
+import 'package:nav_bars/screens/main_screen.dart';
 import 'package:nav_bars/screens/profile_screen.dart';
 import 'package:nav_bars/screens/settings_screen.dart';
 
