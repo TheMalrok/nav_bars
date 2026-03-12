@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:nav_bars/screens/main_screen.dart';
 import 'package:nav_bars/screens/profile_screen.dart';
 import 'package:nav_bars/screens/settings_screen.dart';
@@ -12,36 +13,55 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: currentPageIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        icons: const [Icons.person_outline, Icons.home, Icons.settings],
+        activeIndex: currentPageIndex,
+        gapLocation: GapLocation.none,
+        notchSmoothness: NotchSmoothness.verySmoothEdge,
+        onTap: (int index) {
+          setState(() => currentPageIndex = index);
+          _pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
         },
-        indicatorColor: Colors.blue,
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
-        ],
+        activeColor: Colors.blue,
+        inactiveColor: Colors.grey,
       ),
 
       appBar: AppBar(title: Text('HomeScreen')),
 
-      body: <Widget>[
-        ProfileScreen(),
-        MainScreen(),
-        SettingsScreen(),
-      ][currentPageIndex],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        children: const <Widget>[
+          ProfileScreen(),
+          MainScreen(),
+          SettingsScreen(),
+        ],
+      ),
     );
   }
 }
