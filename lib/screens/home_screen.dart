@@ -70,9 +70,9 @@ class _HomeScreenState extends State<HomeScreen>
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
-        children: const <Widget>[
-          ProfileScreen(),
-          MainScreen(),
+        children: <Widget>[
+          const ProfileScreen(),
+          const MainScreen(),
           SettingsScreen(),
         ],
       ),

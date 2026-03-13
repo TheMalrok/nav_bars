@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:nav_bars/classses/post_class.dart';
 
 class CustomCardWidget extends StatelessWidget {
-  final IconData icon;
-  final Color iconColor;
-  final String title;
-  final String subtitle;
+  final Post post;
 
-  const CustomCardWidget({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.iconColor = Colors.blueAccent,
-  });
+  const CustomCardWidget({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -31,19 +21,15 @@ class CustomCardWidget extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: iconColor.withValues(alpha: 0.1),
+                    color: post.iconColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(
-                    icon,
-                    color: iconColor,
-                    size: 32,
-                  ),
+                  child: Icon(post.icon, color: post.iconColor, size: 32),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    title,
+                    post.title,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -54,7 +40,7 @@ class CustomCardWidget extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              subtitle,
+              post.subtitle,
               style: const TextStyle(
                 color: Colors.black87,
                 height: 1.5,

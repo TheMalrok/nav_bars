@@ -12,12 +12,7 @@ class MainScreen extends StatelessWidget {
       itemCount: cardList.length,
       itemBuilder: (context, index) {
         final post = cardList[index];
-        return CustomCardWidget(
-          icon: post.icon,
-          title: post.title,
-          subtitle: post.subtitle,
-          iconColor: post.iconColor,
-        );
+        return CustomCardWidget(post: post);
       },
     );
   }
