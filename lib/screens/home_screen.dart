@@ -11,20 +11,45 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   int currentPageIndex = 0;
   late final PageController _pageController;
+  late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: currentPageIndex);
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+      initialIndex: currentPageIndex,
+    );
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _tabController.dispose();
     super.dispose();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+    _tabController.animateTo(index);
+  }
+
+  void _onNavTap(int index) {
+    setState(() => currentPageIndex = index);
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+    _tabController.animateTo(index);
   }
 
   @override
@@ -35,27 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
         activeIndex: currentPageIndex,
         gapLocation: GapLocation.none,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
-        onTap: (int index) {
-          setState(() => currentPageIndex = index);
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeOut,
-          );
-        },
+        onTap: _onNavTap,
         activeColor: Colors.blue,
         inactiveColor: Colors.grey,
       ),
 
-      appBar: AppBar(title: Text('HomeScreen')),
+      appBar: AppBar(title: const Text('HomeScreen')),
 
       body: PageView(
         controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
+        onPageChanged: _onPageChanged,
         children: const <Widget>[
           ProfileScreen(),
           MainScreen(),

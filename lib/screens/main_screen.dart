@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nav_bars/content/card_list.dart';
 import 'package:nav_bars/widgets/custom_card_widget.dart';
 
 class MainScreen extends StatelessWidget {
@@ -6,31 +7,18 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ListView.builder(
       padding: const EdgeInsets.all(16),
-      children: const [
-        CustomCardWidget(
-          icon: Icons.analytics_outlined,
-          title: 'Statystyki',
-          subtitle:
-              'Tutaj będą wyświetlane szczegóły aplikacji. Pod spodem znajduje się miejsce na wykresy lub więcej detali.',
-          iconColor: Colors.blueAccent,
-        ),
-        SizedBox(height: 16),
-        CustomCardWidget(
-          icon: Icons.check_circle_outline,
-          title: 'Wszystkie systemy aktywne',
-          subtitle: 'Status: W normie',
-          iconColor: Colors.green,
-        ),
-        SizedBox(height: 16),
-        CustomCardWidget(
-          icon: Icons.info_outline,
-          title: 'Aktualizacja',
-          subtitle: 'Nowa wersja jest dostępna',
-          iconColor: Colors.orange,
-        ),
-      ],
+      itemCount: cardList.length,
+      itemBuilder: (context, index) {
+        final post = cardList[index];
+        return CustomCardWidget(
+          icon: post.icon,
+          title: post.title,
+          subtitle: post.subtitle,
+          iconColor: post.iconColor,
+        );
+      },
     );
   }
 }
