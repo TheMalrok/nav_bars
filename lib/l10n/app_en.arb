@@ -1,0 +1,15 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "homeScreen": "HomeScreen",
+  "editProfile": "Edit profile",
+  "account": "Account",
+  "passwordAndSecurity": "Password & Security",
+  "notifications": "Notifications",
+  "application": "Application",
+  "darkTheme": "Dark Theme",
+  "language": "Language",
+  "languageName": "English",
+  "logout": "Log out"
+}

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:nav_bars/l10n/app_localizations.dart';
+
 import 'package:nav_bars/screens/main_screen.dart';
 import 'package:nav_bars/screens/profile_screen.dart';
 import 'package:nav_bars/screens/settings_screen.dart';
@@ -65,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen>
         inactiveColor: Colors.grey,
       ),
 
-      appBar: AppBar(title: const Text('HomeScreen')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.homeScreen)),
 
       body: PageView(
         controller: _pageController,

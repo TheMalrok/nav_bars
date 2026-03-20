@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nav_bars/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -29,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
         OutlinedButton.icon(
           onPressed: () {},
           icon: const Icon(Icons.edit),
-          label: const Text('Edytuj profil'),
+          label: Text(AppLocalizations.of(context)!.editProfile),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 12),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

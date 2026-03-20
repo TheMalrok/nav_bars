@@ -1,0 +1,15 @@
+{
+  "email": "Email",
+  "password": "Hasło",
+  "login": "Zaloguj",
+  "homeScreen": "Ekran główny",
+  "editProfile": "Edytuj profil",
+  "account": "Konto",
+  "passwordAndSecurity": "Hasło i zabezpieczenia",
+  "notifications": "Powiadomienia",
+  "application": "Aplikacja",
+  "darkTheme": "Motyw ciemny",
+  "language": "Język",
+  "languageName": "Polski",
+  "logout": "Wyloguj się"
+}
