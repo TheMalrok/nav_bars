@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nav_bars/l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +24,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               FlutterLogo(size: 200),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.email,
                   border: OutlineInputBorder(
@@ -42,11 +51,15 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                  _saveUserLogged(_emailController);
                   Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Text(
                   AppLocalizations.of(context)!.login,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -54,5 +67,13 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _saveUserLogged(TextEditingController emailController) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString('email', emailController.text);
+
+    debugPrint(prefs.getString('email'));
   }
 }

@@ -59,7 +59,8 @@ class _MainAppState extends State<MainApp> {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: '/home',
+      //TODO dodaj sprawdzanie czy user jest zalogowany i przekierowanie do home screen
+      initialRoute: '/login',
       routes: {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),

@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
+          //TODO pobierz email z shared preferences
           'jan.kowalski@example.com',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -36,7 +37,9 @@ class ProfileScreen extends StatelessWidget {
           label: Text(AppLocalizations.of(context)!.editProfile),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         ),
       ],
