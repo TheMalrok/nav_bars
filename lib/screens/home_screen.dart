@@ -63,8 +63,9 @@ class _HomeScreenState extends State<HomeScreen>
         gapLocation: GapLocation.none,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
         onTap: _onNavTap,
-        activeColor: Colors.blue,
-        inactiveColor: Colors.grey,
+        activeColor: Theme.of(context).colorScheme.primary,
+        inactiveColor: Theme.of(context).colorScheme.onSurfaceVariant,
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
 
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.homeScreen)),

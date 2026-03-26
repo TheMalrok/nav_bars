@@ -17,9 +17,9 @@ class SettingsScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Text(
             AppLocalizations.of(context)!.account,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.blueAccent,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
@@ -42,16 +42,24 @@ class SettingsScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Text(
             AppLocalizations.of(context)!.application,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.blueAccent,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
         ListTile(
           leading: const Icon(Icons.dark_mode_outlined),
           title: Text(AppLocalizations.of(context)!.darkTheme),
-          trailing: Switch(value: false, onChanged: (val) {}),
+          trailing: Switch(
+            value: Theme.of(context).brightness == Brightness.dark,
+            onChanged: (val) {
+              MainApp.setThemeMode(
+                context,
+                val ? ThemeMode.dark : ThemeMode.light,
+              );
+            },
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.language),
@@ -69,11 +77,11 @@ class SettingsScreen extends StatelessWidget {
         ),
         const Divider(height: 32),
         ListTile(
-          leading: const Icon(Icons.logout, color: Colors.redAccent),
+          leading: Icon(Icons.logout, color: Theme.of(context).colorScheme.error),
           title: Text(
             AppLocalizations.of(context)!.logout,
-            style: const TextStyle(
-              color: Colors.redAccent,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.error,
               fontWeight: FontWeight.bold,
             ),
           ),

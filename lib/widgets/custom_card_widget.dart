@@ -41,11 +41,7 @@ class CustomCardWidget extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               post.subtitle,
-              style: const TextStyle(
-                color: Colors.black87,
-                height: 1.5,
-                fontSize: 16,
-              ),
+              style: const TextStyle(height: 1.5, fontSize: 16),
             ),
           ],
         ),
