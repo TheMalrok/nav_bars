@@ -36,7 +36,7 @@ class _MainAppState extends State<MainApp> {
       locale: _locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: '/login',
+      initialRoute: '/home',
       routes: {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
@@ -44,3 +44,4 @@ class _MainAppState extends State<MainApp> {
     );
   }
 }
+//test
