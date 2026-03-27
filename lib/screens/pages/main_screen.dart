@@ -104,9 +104,32 @@ class _MainScreenState extends State<MainScreen> {
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
               itemCount: _posts.length,
               itemBuilder: (context, index) {
-                return CustomCardWidget(
-                  post: _posts[index],
-                  onDeletePressed: () => _deletePost(index),
+                final post = _posts[index];
+                return Dismissible(
+                  key: ValueKey(post),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    _deletePost(index);
+                  },
+                  background: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.error.withValues(alpha: 0.8),
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
+                      ),
+                    ),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  child: CustomCardWidget(
+                    post: post,
+                    onDeletePressed: () => _deletePost(index),
+                  ),
                 );
               },
             ),
