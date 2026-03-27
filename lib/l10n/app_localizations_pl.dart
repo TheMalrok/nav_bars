@@ -58,4 +58,25 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get passwordTooShort => 'Hasło musi mieć co najmniej 6 znaków';
+
+  @override
+  String get newPost => 'Nowy post';
+
+  @override
+  String get postTitle => 'Tytuł';
+
+  @override
+  String get postDescription => 'Opis';
+
+  @override
+  String get iconLabel => 'Ikona';
+
+  @override
+  String get colorLabel => 'Kolor';
+
+  @override
+  String get cancel => 'Anuluj';
+
+  @override
+  String get add => 'Dodaj';
 }

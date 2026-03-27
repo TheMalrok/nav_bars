@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+//language and theme
 import 'package:nav_bars/l10n/app_localizations.dart';
-import 'package:nav_bars/screens/login_screen.dart';
-import 'package:nav_bars/screens/home_screen.dart';
+import 'package:nav_bars/style/app_theme.dart';
+//screens
+import 'package:nav_bars/screens/routes.dart';
+//storage
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final String? email = prefs.getString('email');
-  final String initialRoute = email != null ? '/home' : '/login';
+  final String initialRoute = email != null ? AppRoutes.home : AppRoutes.login;
 
   runApp(MainApp(initialRoute: initialRoute));
 }
@@ -53,24 +56,12 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       locale: _locale,
       themeMode: _themeMode,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blueAccent,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blueAccent,
-        brightness: Brightness.dark,
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: widget.initialRoute,
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
-      },
+      routes: AppRoutes.routes,
     );
   }
 }
-//test

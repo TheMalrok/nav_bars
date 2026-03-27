@@ -3,8 +3,17 @@ import 'package:nav_bars/classses/post_class.dart';
 
 class CustomCardWidget extends StatelessWidget {
   final Post post;
+  final bool isSaved;
+  final VoidCallback? onSaveToggle;
+  final VoidCallback? onDeletePressed;
 
-  const CustomCardWidget({super.key, required this.post});
+  const CustomCardWidget({
+    super.key,
+    required this.post,
+    this.isSaved = false,
+    this.onSaveToggle,
+    this.onDeletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +45,22 @@ class CustomCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (onSaveToggle != null)
+                  IconButton(
+                    icon: Icon(
+                      isSaved ? Icons.bookmark : Icons.bookmark_border,
+                      color: isSaved
+                          ? Theme.of(context).colorScheme.primary
+                          : null,
+                    ),
+                    onPressed: onSaveToggle,
+                  ),
+                if (onDeletePressed != null)
+                  IconButton(
+                    icon: const Icon(Icons.delete_outline),
+                    color: Theme.of(context).colorScheme.error,
+                    onPressed: onDeletePressed,
+                  ),
               ],
             ),
             const SizedBox(height: 20),

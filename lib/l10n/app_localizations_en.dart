@@ -58,4 +58,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get passwordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get newPost => 'New Post';
+
+  @override
+  String get postTitle => 'Title';
+
+  @override
+  String get postDescription => 'Description';
+
+  @override
+  String get iconLabel => 'Icon';
+
+  @override
+  String get colorLabel => 'Color';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get add => 'Add';
 }

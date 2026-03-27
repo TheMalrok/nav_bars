@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:nav_bars/l10n/app_localizations.dart';
 
-import 'package:nav_bars/screens/main_screen.dart';
-import 'package:nav_bars/screens/profile_screen.dart';
-import 'package:nav_bars/screens/settings_screen.dart';
+import 'package:nav_bars/screens/pages/main_screen.dart';
+import 'package:nav_bars/screens/pages/profile_screen.dart';
+import 'package:nav_bars/screens/pages/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  int currentPageIndex = 0;
+  int currentPageIndex = 1;
   late final PageController _pageController;
   late final TabController _tabController;
 

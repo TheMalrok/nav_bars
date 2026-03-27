@@ -15,5 +15,12 @@
   "emailRequired": "Email jest wymagany",
   "invalidEmail": "Wpisz poprawny adres email",
   "passwordRequired": "Hasło jest wymagane",
-  "passwordTooShort": "Hasło musi mieć co najmniej 6 znaków"
+  "passwordTooShort": "Hasło musi mieć co najmniej 6 znaków",
+  "newPost": "Nowy post",
+  "postTitle": "Tytuł",
+  "postDescription": "Opis",
+  "iconLabel": "Ikona",
+  "colorLabel": "Kolor",
+  "cancel": "Anuluj",
+  "add": "Dodaj"
 }

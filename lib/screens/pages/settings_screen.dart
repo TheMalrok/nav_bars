@@ -62,19 +62,36 @@ class SettingsScreen extends StatelessWidget {
             },
           ),
         ),
-        ListTile(
+        ExpansionTile(
           leading: const Icon(Icons.language),
           title: Text(AppLocalizations.of(context)!.language),
           subtitle: Text(AppLocalizations.of(context)!.languageName),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () {
-            Locale currentLocale = Localizations.localeOf(context);
-            if (currentLocale.languageCode == 'pl') {
-              MainApp.setLocale(context, const Locale('en'));
-            } else {
-              MainApp.setLocale(context, const Locale('pl'));
-            }
-          },
+          children: [
+            ListTile(
+              title: const Text('Polski'),
+              trailing: Localizations.localeOf(context).languageCode == 'pl'
+                  ? Icon(
+                      Icons.check,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () {
+                MainApp.setLocale(context, const Locale('pl'));
+              },
+            ),
+            ListTile(
+              title: const Text('English'),
+              trailing: Localizations.localeOf(context).languageCode == 'en'
+                  ? Icon(
+                      Icons.check,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () {
+                MainApp.setLocale(context, const Locale('en'));
+              },
+            ),
+          ],
         ),
         const Divider(height: 32),
         ListTile(

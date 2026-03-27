@@ -15,5 +15,12 @@
   "emailRequired": "Email is required",
   "invalidEmail": "Enter a valid email",
   "passwordRequired": "Password is required",
-  "passwordTooShort": "Password must be at least 6 characters"
+  "passwordTooShort": "Password must be at least 6 characters",
+  "newPost": "New Post",
+  "postTitle": "Title",
+  "postDescription": "Description",
+  "iconLabel": "Icon",
+  "colorLabel": "Color",
+  "cancel": "Cancel",
+  "add": "Add"
 }

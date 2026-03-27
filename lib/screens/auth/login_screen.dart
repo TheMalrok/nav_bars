@@ -33,9 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: _emailController,
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.email,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
                         prefixIcon: const Icon(Icons.email_outlined),
                       ),
                       validator: (value) {
@@ -55,9 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.password,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
                         prefixIcon: const Icon(Icons.lock_outline),
                       ),
                       validator: (value) {
@@ -71,12 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     FilledButton(
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 54),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _saveUserLogged(_emailController);
@@ -85,10 +73,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.login,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
                       ),
                     ),
                   ],
