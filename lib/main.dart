@@ -1,23 +1,67 @@
 import 'package:flutter/material.dart';
+//language and theme
+import 'package:nav_bars/l10n/app_localizations.dart';
+import 'package:nav_bars/style/app_theme.dart';
+//screens
+import 'package:nav_bars/screens/routes.dart';
+//storage
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:nav_bars/screens/login_screen.dart';
-import 'package:nav_bars/screens/home_screen.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final String? email = prefs.getString('email');
+  final String initialRoute = email != null ? AppRoutes.home : AppRoutes.login;
 
-void main() {
-  runApp(const MainApp());
+  runApp(MainApp(initialRoute: initialRoute));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MainApp extends StatefulWidget {
+  final String initialRoute;
+  const MainApp({super.key, required this.initialRoute});
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    var state = context.findAncestorStateOfType<_MainAppState>();
+    state?.setLocale(newLocale);
+  }
+
+  static void setThemeMode(BuildContext context, ThemeMode themeMode) {
+    var state = context.findAncestorStateOfType<_MainAppState>();
+    state?.setThemeMode(themeMode);
+  }
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  Locale? _locale;
+  ThemeMode _themeMode = ThemeMode.system;
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  void setThemeMode(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
-      },
+      debugShowCheckedModeBanner: false,
+      locale: _locale,
+      themeMode: _themeMode,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      initialRoute: widget.initialRoute,
+      routes: AppRoutes.routes,
     );
   }
 }
