@@ -11,5 +11,9 @@
   "darkTheme": "Motyw ciemny",
   "language": "Język",
   "languageName": "Polski",
-  "logout": "Wyloguj się"
+  "logout": "Wyloguj się",
+  "emailRequired": "Email jest wymagany",
+  "invalidEmail": "Wpisz poprawny adres email",
+  "passwordRequired": "Hasło jest wymagane",
+  "passwordTooShort": "Hasło musi mieć co najmniej 6 znaków"
 }

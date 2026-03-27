@@ -46,4 +46,16 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get logout => 'Wyloguj się';
+
+  @override
+  String get emailRequired => 'Email jest wymagany';
+
+  @override
+  String get invalidEmail => 'Wpisz poprawny adres email';
+
+  @override
+  String get passwordRequired => 'Hasło jest wymagane';
+
+  @override
+  String get passwordTooShort => 'Hasło musi mieć co najmniej 6 znaków';
 }

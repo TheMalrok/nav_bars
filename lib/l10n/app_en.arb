@@ -11,5 +11,9 @@
   "darkTheme": "Dark Theme",
   "language": "Language",
   "languageName": "English",
-  "logout": "Log out"
+  "logout": "Log out",
+  "emailRequired": "Email is required",
+  "invalidEmail": "Enter a valid email",
+  "passwordRequired": "Password is required",
+  "passwordTooShort": "Password must be at least 6 characters"
 }
