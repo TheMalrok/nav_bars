@@ -1,32 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nav_bars/l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  String? _email;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadEmail();
-  }
-
-  Future<void> _loadEmail() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _email = prefs.getString('email');
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final user = Supabase.instance.client.auth.currentUser;
+
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
@@ -36,14 +18,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: const Icon(Icons.person, size: 60, color: Colors.white),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'Jan Kowalski',
+        Text(
+          user?.userMetadata?['full_name'] ?? 'Użytkownik',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
-          _email ?? '...',
+          user?.email ?? '...',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 16,

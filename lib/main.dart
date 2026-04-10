@@ -4,14 +4,19 @@ import 'package:nav_bars/l10n/app_localizations.dart';
 import 'package:nav_bars/style/app_theme.dart';
 //screens
 import 'package:nav_bars/screens/routes.dart';
-//storage
-import 'package:shared_preferences/shared_preferences.dart';
+//supabase
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  final String? email = prefs.getString('email');
-  final String initialRoute = email != null ? AppRoutes.home : AppRoutes.login;
+  await Supabase.initialize(
+    url: 'https://mxwshtidwqceufuwahqz.supabase.co',
+    anonKey: 'sb_publishable_TcyStNejSX9VAM38vJFV4Q_PYYVs2Ae',
+  );
+  final session = Supabase.instance.client.auth.currentSession;
+  final String initialRoute = session != null
+      ? AppRoutes.home
+      : AppRoutes.login;
 
   runApp(MainApp(initialRoute: initialRoute));
 }

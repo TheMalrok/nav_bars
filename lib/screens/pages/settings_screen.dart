@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:nav_bars/l10n/app_localizations.dart';
 import 'package:nav_bars/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
@@ -107,9 +107,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           onTap: () async {
-            final SharedPreferences prefs =
-                await SharedPreferences.getInstance();
-            await prefs.remove('email');
+            await Supabase.instance.client.auth.signOut();
             if (context.mounted) {
               Navigator.pushReplacementNamed(context, '/login');
             }

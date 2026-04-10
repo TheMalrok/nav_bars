@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nav_bars/l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,7 +11,26 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _supabase = Supabase.instance.client;
+
+  Future<void> _login() async {
+    if (!_formKey.currentState!.validate()) return;
+    try {
+      await _supabase.auth.signInWithPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+      if (mounted) Navigator.pushReplacementNamed(context, '/home');
+    } on AuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.password,
@@ -65,15 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     FilledButton(
+                      onPressed: _login,
+                      child: Text(AppLocalizations.of(context)!.login),
+                    ),
+                    TextButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _saveUserLogged(_emailController);
-                          Navigator.pushReplacementNamed(context, '/home');
-                        }
+                        Navigator.pushNamed(context, '/register');
                       },
-                      child: Text(
-                        AppLocalizations.of(context)!.login,
-                      ),
+                      child: const Text('Nie masz konta? Zarejestruj się'),
                     ),
                   ],
                 ),
@@ -83,13 +102,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void _saveUserLogged(TextEditingController emailController) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setString('email', emailController.text);
-
-    //debugPrint(prefs.getString('email'));
   }
 }
