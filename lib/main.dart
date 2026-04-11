@@ -6,12 +6,15 @@ import 'package:nav_bars/style/app_theme.dart';
 import 'package:nav_bars/screens/routes.dart';
 //supabase
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
   await Supabase.initialize(
-    url: 'https://mxwshtidwqceufuwahqz.supabase.co',
-    anonKey: 'sb_publishable_TcyStNejSX9VAM38vJFV4Q_PYYVs2Ae',
+    url: dotenv.env['SUPABASE_URL'] ?? '',
+    anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
   );
   final session = Supabase.instance.client.auth.currentSession;
   final String initialRoute = session != null

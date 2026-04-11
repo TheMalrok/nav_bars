@@ -81,7 +81,6 @@ class AppTheme {
         surface: _darkSurface,
         onSurface: Color(0xFFF1F5F9),
         onSurfaceVariant: Color(0xFF94A3B8),
-        background: _darkBackground,
       ),
       scaffoldBackgroundColor: _darkBackground,
       appBarTheme: const AppBarTheme(
