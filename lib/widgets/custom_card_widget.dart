@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nav_bars/classses/post_class.dart';
+import 'package:nav_bars/classes/post_class.dart';
 
 class CustomCardWidget extends StatelessWidget {
   final Post post;

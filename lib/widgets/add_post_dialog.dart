@@ -1,24 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nav_bars/classses/post_class.dart';
+import 'package:nav_bars/classes/post_class.dart';
 import 'package:nav_bars/l10n/app_localizations.dart';
-
-const _presetIcons = [
-  Icons.note_outlined,
-  Icons.star_border,
-  Icons.notifications_outlined,
-  Icons.favorite_border,
-  Icons.warning_amber_outlined,
-  Icons.lightbulb_outline,
-];
-
-const _presetColors = [
-  Colors.blueAccent,
-  Colors.green,
-  Colors.orange,
-  Colors.red,
-  Colors.purple,
-  Colors.teal,
-];
 
 class AddPostDialog extends StatefulWidget {
   const AddPostDialog({super.key});
@@ -75,7 +57,7 @@ class _AddPostDialogState extends State<AddPostDialog> {
             Row(
               spacing: 4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(_presetIcons.length, (i) {
+              children: List.generate(Post.presetIcons.length, (i) {
                 final selected = _selectedIcon == i;
                 return GestureDetector(
                   onTap: () => setState(() => _selectedIcon = i),
@@ -83,19 +65,19 @@ class _AddPostDialogState extends State<AddPostDialog> {
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       color: selected
-                          ? _presetColors[_selectedColor].withValues(alpha: 0.2)
+                          ? Post.presetColors[_selectedColor].withValues(alpha: 0.2)
                           : Colors.transparent,
                       border: Border.all(
                         color: selected
-                            ? _presetColors[_selectedColor]
+                            ? Post.presetColors[_selectedColor]
                             : Colors.grey.shade300,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
-                      _presetIcons[i],
-                      color: selected ? _presetColors[_selectedColor] : null,
+                      Post.presetIcons[i],
+                      color: selected ? Post.presetColors[_selectedColor] : null,
                     ),
                   ),
                 );
@@ -107,7 +89,7 @@ class _AddPostDialogState extends State<AddPostDialog> {
             Row(
               spacing: 4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(_presetColors.length, (i) {
+              children: List.generate(Post.presetColors.length, (i) {
                 final selected = _selectedColor == i;
                 return GestureDetector(
                   onTap: () => setState(() => _selectedColor = i),
@@ -115,7 +97,7 @@ class _AddPostDialogState extends State<AddPostDialog> {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: _presetColors[i],
+                      color: Post.presetColors[i],
                       shape: BoxShape.circle,
                       border: selected
                           ? Border.all(
@@ -145,8 +127,8 @@ class _AddPostDialogState extends State<AddPostDialog> {
             final newPost = Post(
               title: title,
               subtitle: subtitle.isEmpty ? '' : subtitle,
-              icon: _presetIcons[_selectedIcon],
-              iconColor: _presetColors[_selectedColor],
+              icon: Post.presetIcons[_selectedIcon],
+              iconColor: Post.presetColors[_selectedColor],
             );
 
             Navigator.pop(context, newPost);

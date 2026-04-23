@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:nav_bars/classses/post_class.dart';
+import 'package:nav_bars/classes/post_class.dart';
 import 'package:nav_bars/widgets/add_post_dialog.dart';
 import 'package:nav_bars/widgets/custom_card_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,9 +34,9 @@ class _MainScreenState extends State<MainScreen> {
         return Post(
           title: m['title'] as String,
           subtitle: m['subtitle'] as String,
-          icon: IconData(
-            m['iconCode'] as int,
-            fontFamily: m['fontFamily'] as String,
+          icon: Post.presetIcons.firstWhere(
+            (i) => i.codePoint == m['iconCode'],
+            orElse: () => Post.presetIcons.first,
           ),
           iconColor: Color(m['colorValue'] as int),
         );
